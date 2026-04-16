@@ -1,14 +1,20 @@
-import React from "react";
+import Navbar from "../components/Navbar";
+import HomeHero from "../components/Home/HomeHero";
+import HomeCategories from "../components/Home/HomeCategory";
+import HomeBanner from "../components/Home/HomeBanner";
+import HomeProducts from "../components/Home/HomeProducts";
+import HomeReviews from "../components/Home/HomeReviews";
 
-const HomeScreen = () => {
+function HomeScreen() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800">
-        Inicio - PrimeAthletics
-      </h1>
-      <p>Bienvenido a la tienda principal.</p>
-    </div>
+    <>
+      <HomeHero />
+      <HomeCategories />
+      <HomeBanner />
+      <HomeProducts />
+      <HomeReviews />
+    </>
   );
-};
+}
 
 export default HomeScreen;

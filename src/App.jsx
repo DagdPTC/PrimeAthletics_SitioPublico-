@@ -6,6 +6,7 @@ import ProductsScreen from "./screens/ProductsScreen";
 import NewsScreen from "./screens/NewsScreen";
 import AboutScreen from "./screens/AboutScreen";
 
+
 const App = () => {
   return (
     <Router>
@@ -20,7 +21,7 @@ const App = () => {
             {/* RUTA DOBLE: Una para todos los productos y otra para categorías específicas */}
             <Route path="/productos" element={<ProductsScreen />} />
             <Route path="/productos/:categoria" element={<ProductsScreen />} />
-
+            
             <Route path="/novedades" element={<NewsScreen />} />
             <Route path="/nosotros" element={<AboutScreen />} />
           </Routes>
