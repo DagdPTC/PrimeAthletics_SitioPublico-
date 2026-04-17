@@ -22,7 +22,7 @@ const HeroCategoryCard = ({
       />
 
       {/* Overlay degradado */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
       {/* Texto inferior */}
       <div className="relative z-10 p-6 w-full">

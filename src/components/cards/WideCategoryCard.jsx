@@ -10,7 +10,7 @@ const WideCategoryCard = ({ label, slug, image, tag }) => (
       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
       style={{ backgroundImage: `url(${image})` }}
     />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
     <div className="relative z-10 p-4 w-full flex items-end justify-between">
       <h3 className="text-white font-black italic uppercase text-xl leading-none">
