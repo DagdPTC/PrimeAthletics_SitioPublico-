@@ -38,7 +38,7 @@ const CategoryHeroGrid = () => (
 
       return (
         <div key={slug}>
-          {/* Título de sección */}
+          
           <p className="text-[11px] font-semibold tracking-[0.18em] text-gray-500 uppercase mb-4">
             {label}
           </p>

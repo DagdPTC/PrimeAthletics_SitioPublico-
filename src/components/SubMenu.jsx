@@ -9,7 +9,7 @@ const SubMenu = ({ base = "/hombres" }) => {
 
   return (
     <div className="w-full border-b border-black/10 bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-8">
+      <div className="w-full px-6 py-4 flex items-center gap-8">
         <span className="text-lg font-semibold">Hombres</span>
 
         <div className="flex gap-6 text-sm">

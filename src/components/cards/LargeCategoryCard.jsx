@@ -4,7 +4,7 @@ const LargeCategoryCard = ({ label, image, to }) => {
   return (
     <Link
       to={to}
-      className="group relative h-[420px] w-full overflow-hidden cursor-pointer"
+      className="group relative h-[720px] w-full overflow-hidden cursor-pointer"
     >
       <img
         src={image}

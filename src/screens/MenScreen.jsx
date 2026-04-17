@@ -15,7 +15,7 @@ const MenScreen = () => {
       {/* SUBMENU */}
       <SubMenu />
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="w-full px-6 py-12">
         {/* ───── BLOQUE 1 ───── */}
         <div className="mb-12">
           <p className="text-base tracking-[0.25em] uppercase text-black font-semibold mb-3">
@@ -48,7 +48,7 @@ const MenScreen = () => {
             Rendimiento
           </p>
 
-          <h2 className="font-['Oswald'] text-5xl md:text-6xl leading-[0.9] uppercase tracking-tight max-w-2xl">
+          <h2 className="font-['Oswald'] text-5xl md:text-6xl leading-[0.9] uppercase tracking-tight">
             Todo lo que necesitas para ser el mejor
           </h2>
         </div>
