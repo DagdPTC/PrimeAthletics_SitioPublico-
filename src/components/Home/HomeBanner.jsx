@@ -8,7 +8,7 @@ function HomeBanner() {
 
       <div className="absolute inset-0 flex items-center justify-center bg-black/50">
         <h2 className="text-white text-sm tracking-widest">
-          SECCION DE FRASE MOTIVADORA O ESLOGAN
+          ¿Competitivo? ¡Claro que sí! Encuentra los mejores precios en nuestros productos 
         </h2>
       </div>
     </div>

@@ -8,7 +8,7 @@ function HomeHero() {
 
       <div className="absolute inset-0 flex items-center justify-center bg-black/50">
         <h1 className="text-white text-sm tracking-widest text-center">
-          CARRUSEL ACERCA DE PRODUCTOS EN DESCUENTO
+          EL PEAK SOMOS NOSTROS, TU ERES EL PRIME 
         </h1>
       </div>
     </div>
