@@ -1,12 +1,18 @@
-import React from "react";
+import Navbar from "../components/Navbar";
+import NovedadesHero from "../components/novedades/NovedadesHero";
+import NovedadesCards from "../components/novedades/NovedadesCards";
+import Lanzamientos from "../components/novedades/Lanzamientos";
 
-const NewsScreen = () => {
+function NovedadesScreen() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800">Novedades</h1>
-      <p>Próximos lanzamientos y eventos.</p>
-    </div>
+    <>
+        <div className="px-10 py-6 space-y-10">
+        <NovedadesHero />
+        <NovedadesCards />
+        <Lanzamientos />
+      </div>
+    </>
   );
-};
+}
 
-export default NewsScreen;
+export default NovedadesScreen;

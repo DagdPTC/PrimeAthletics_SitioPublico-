@@ -7,6 +7,7 @@ import NewsScreen from "./screens/NewsScreen";
 import AboutScreen from "./screens/AboutScreen";
 import MenScreen from "./screens/MenScreen";
 import WomenScreen from "./screens/WomenScreen";
+import NovedadesScreen from "./screens/NewsScreen";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
 
             <Route path="/novedades" element={<NewsScreen />} />
             <Route path="/nosotros" element={<AboutScreen />} />
+            <Route path="/novedades" element={<NovedadesScreen />} />
           </Routes>
         </main>
       </div>
