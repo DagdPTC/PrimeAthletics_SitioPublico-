@@ -5,9 +5,9 @@ import HorizontalBanner from "../components/cards/HorizontalBanner";
 import CategoryGridCard from "../components/cards/CategoryGridCard";
 
 // IMAGENES
-import menTennis from "../assets/images/menImages/tenis-hombre.png";
-import menClothing from "../assets/images/menImages/ropa-hombre.png";
-import futballClothes from "../assets/images/menImages/ropa-futbol.png";
+import womenTennis from "../assets/images/menImages/tenis-hombre.png";
+import womenClothing from "../assets/images/menImages/ropa-hombre.png";
+import footballClothes from "../assets/images/menImages/ropa-futbol.png";
 import basketClothes from "../assets/images/menImages/ropa-basquet.png";
 import volleyClothes from "../assets/images/menImages/ropa-volley.png";
 import newBasketShoes from "../assets/images/menImages/nuevo-tenis-basquet.png";
@@ -17,22 +17,25 @@ import shorts from "../assets/images/menImages/shorts-hombre.png";
 import pants from "../assets/images/menImages/pants-hombre.png";
 import socks from "../assets/images/menImages/socks-hombre.png";
 
-const MenScreen = () => {
+const WomenScreen = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       {/* SUBMENU */}
       <SubMenu />
 
       <div className="mb-20">
-        <HorizontalBanner image={offers} to="/hombres/basketball" />
+        <HorizontalBanner
+          // image={offers}
+          to="/mujeres/basketball"
+        />
       </div>
 
       {/* BANNER DESTACADO */}
       <div className="mb-20">
         <HorizontalBanner
-          image={newBasketShoes}
+          // image={newBasketShoes}
           title="Últimos lanzamientos"
-          to="/hombres/basketball"
+          to="/mujeres/basketball"
         />
       </div>
 
@@ -54,15 +57,15 @@ const MenScreen = () => {
         {/* CARDS GRANDES */}
         <div className="grid grid-cols-2 gap-5 mb-20">
           <LargeCategoryCard
-            label="Tenis para Hombre"
-            to="/hombres/zapatos"
-            image={menTennis}
+            label="Tenis para Mujer"
+            to="/mujeres/zapatos"
+            // image={womenTennis}
           />
 
           <LargeCategoryCard
-            label="Ropa para Hombre"
-            to="/hombres/ropa"
-            image={menClothing}
+            label="Ropa para Mujer"
+            to="/mujeres/ropa"
+            // image={womenClothing}
           />
         </div>
 
@@ -84,18 +87,18 @@ const MenScreen = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <SportCard
             label="Fútbol"
-            to="/hombres/futbol"
-            image={futballClothes}
+            to="/mujeres/futbol"
+            // image={footballClothes}
           />
           <SportCard
             label="Basketball"
-            to="/hombres/basketball"
-            image={basketClothes}
+            to="/mujeres/basketball"
+            // image={basketClothes}
           />
           <SportCard
             label="Volleyball"
-            to="/hombres/volleyball"
-            image={volleyClothes}
+            to="/mujeres/volleyball"
+            // image={volleyClothes}
           />
         </div>
 
@@ -112,21 +115,25 @@ const MenScreen = () => {
 
         {/* GRID CATEGORÍAS FULL SCREEN */}
         <div className="w-full h-screen grid grid-cols-2 grid-rows-2 gap-2 mt-20">
-          <CategoryGridCard image={pants} label="Pants" to="/hombres/pants" />
           <CategoryGridCard
-            image={socks}
+            // image={pants}
+            label="Pants"
+            to="/mujeres/pants"
+          />
+          <CategoryGridCard
+            // image={socks}
             label="Calcetas"
-            to="/hombres/calcetas"
+            to="/mujeres/calcetas"
           />
           <CategoryGridCard
-            image={tshirt}
+            // image={tshirt}
             label="Camisetas"
-            to="/hombres/camisetas"
+            to="/mujeres/camisetas"
           />
           <CategoryGridCard
-            image={shorts}
+            // image={shorts}
             label="Shorts"
-            to="/hombres/shorts"
+            to="/mujeres/shorts"
           />
         </div>
       </div>
@@ -134,4 +141,4 @@ const MenScreen = () => {
   );
 };
 
-export default MenScreen;
+export default WomenScreen;

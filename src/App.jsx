@@ -1,10 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import NewsScreen from "./screens/NewsScreen";
 import AboutScreen from "./screens/AboutScreen";
 import MenScreen from "./screens/MenScreen";
+import WomenScreen from "./screens/WomenScreen";
 
 const App = () => {
   return (
@@ -13,19 +15,20 @@ const App = () => {
       <Navbar />
 
       <div className="min-h-screen bg-gray-50">
-        <main >
+        <main>
           <Routes>
             <Route path="/" element={<HomeScreen />} />
 
-            
-           
             <Route path="/hombres" element={<MenScreen />} />
+            <Route path="/mujeres" element={<WomenScreen />} />
 
             <Route path="/novedades" element={<NewsScreen />} />
             <Route path="/nosotros" element={<AboutScreen />} />
           </Routes>
         </main>
       </div>
+
+      <Footer />
     </Router>
   );
 };
