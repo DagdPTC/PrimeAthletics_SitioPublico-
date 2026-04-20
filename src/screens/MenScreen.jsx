@@ -10,7 +10,7 @@ import menClothing from "../assets/images/menImages/ropa-hombre.png";
 import futballClothes from "../assets/images/menImages/ropa-futbol.png";
 import basketClothes from "../assets/images/menImages/ropa-basquet.png";
 import volleyClothes from "../assets/images/menImages/ropa-volley.png";
-import newBasketShoes from "../assets/images/menImages/nuevo-tenis-basquet.png";
+import newBasketShoes from "../assets/images/menImages/lanzamientos-hombre.png";
 import offers from "../assets/images/menImages/ofertas.png";
 import tshirt from "../assets/images/menImages/camiseta-hombre.png";
 import shorts from "../assets/images/menImages/shorts-hombre.png";
@@ -21,10 +21,10 @@ const MenScreen = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       {/* SUBMENU */}
-      <SubMenu />
+      <SubMenu title="Hombres" base="/hombres" />
 
       <div className="mb-20">
-        <HorizontalBanner image={offers} to="/hombres/basketball" />
+        <HorizontalBanner image={offers} to="/hombres/ofertas" />
       </div>
 
       {/* BANNER DESTACADO */}
@@ -32,7 +32,7 @@ const MenScreen = () => {
         <HorizontalBanner
           image={newBasketShoes}
           title="Últimos lanzamientos"
-          to="/hombres/basketball"
+          to="/hombres/novedades"
         />
       </div>
 

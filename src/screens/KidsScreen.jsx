@@ -16,14 +16,14 @@ import shorts from "../assets/images/womenImages/shorts-mujer.png";
 import pants from "../assets/images/womenImages/pants-mujer.png";
 import socks from "../assets/images/womenImages/socks-mujer.png";
 
-const WomenScreen = () => {
+const KidsScreen = () => {
   return (
     <div className="bg-white text-black min-h-screen">
       {/* SUBMENU */}
-      <SubMenu title="Mujeres" base="/mujeres" />
+      <SubMenu title="Kids" base="/ninos" />
 
       <div className="mb-20">
-        <HorizontalBanner image={offers} to="/mujeres/ofertas" />
+        <HorizontalBanner image={offers} to="/ninos/ofertas" />
       </div>
 
       {/* BANNER DESTACADO */}
@@ -31,7 +31,7 @@ const WomenScreen = () => {
         <HorizontalBanner
           image={newBasketShoes}
           title="Últimos lanzamientos"
-          to="/mujeres/novedades"
+          to="/ninos/novedades"
         />
       </div>
 
@@ -54,13 +54,13 @@ const WomenScreen = () => {
         <div className="grid grid-cols-2 gap-5 mb-20">
           <LargeCategoryCard
             label="Tenis para Mujer"
-            to="/mujeres/zapatos"
+            to="/ninos/zapatos"
             image={womenTennis}
           />
 
           <LargeCategoryCard
             label="Ropa para Mujer"
-            to="/mujeres/ropa"
+            to="/ninos/ropa"
             image={womenClothing}
           />
         </div>
@@ -83,17 +83,17 @@ const WomenScreen = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <SportCard
             label="Fútbol"
-            to="/mujeres/futbol"
+            to="/ninos/futbol"
             image={footballClothes}
           />
           <SportCard
             label="Basketball"
-            to="/mujeres/basketball"
+            to="/ninos/basketball"
             image={basketClothes}
           />
           <SportCard
             label="Volleyball"
-            to="/mujeres/volleyball"
+            to="/ninos/volleyball"
             image={volleyClothes}
           />
         </div>
@@ -111,11 +111,11 @@ const WomenScreen = () => {
 
         {/* GRID CATEGORÍAS FULL SCREEN */}
         <div className="w-full h-screen grid grid-cols-2 grid-rows-2 gap-2 mt-20">
-          <CategoryGridCard image={pants} label="Pants" to="/mujeres/pants" />
+          <CategoryGridCard image={pants} label="Pants" to="/ninos/pants" />
           <CategoryGridCard
             image={socks}
             label="Calcetas"
-            to="/mujeres/calcetas"
+            to="/ninos/calcetas"
           />
           <CategoryGridCard
             image={tshirt}
@@ -133,4 +133,4 @@ const WomenScreen = () => {
   );
 };
 
-export default WomenScreen;
+export default KidsScreen;

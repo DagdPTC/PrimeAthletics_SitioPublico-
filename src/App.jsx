@@ -1,17 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
-import NewsScreen from "./screens/NewsScreen";
 import AboutScreen from "./screens/AboutScreen";
 import MenScreen from "./screens/MenScreen";
 import WomenScreen from "./screens/WomenScreen";
+import KidsScreen from "./screens/KidsScreen";
 import NovedadesScreen from "./screens/NewsScreen";
+import CategoryScreen from "./screens/CategoryScreen";
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       {/* El Navbar persistente */}
       <Navbar />
 
@@ -22,8 +25,9 @@ const App = () => {
 
             <Route path="/hombres" element={<MenScreen />} />
             <Route path="/mujeres" element={<WomenScreen />} />
+            <Route path="/ninos" element={<KidsScreen />} />
+            <Route path="/:gender/:category" element={<CategoryScreen />} />
 
-            <Route path="/novedades" element={<NewsScreen />} />
             <Route path="/nosotros" element={<AboutScreen />} />
             <Route path="/novedades" element={<NovedadesScreen />} />
           </Routes>
