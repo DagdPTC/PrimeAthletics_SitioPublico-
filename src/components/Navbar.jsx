@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -31,6 +32,8 @@ const Navbar = () => {
 
   const navLinkActive = "text-gray-200";
   const navLinkInactive = "text-gray-500 hover:text-gray-200";
+
+  const { totalItems, toggleDrawer } = useCart();
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#0f1117] border-b border-white/8">
@@ -174,17 +177,40 @@ const Navbar = () => {
           </nav>
 
           {/* CARRITO */}
-          <Link
-            to="/carrito"
-            className="relative text-gray-500 hover:text-gray-200 transition-colors p-1"
+          <button
+            onClick={toggleDrawer}
+            className="relative cursor-pointer group p-2 text-gray-400 hover:text-[#b9d9ff] transition-colors duration-200"
+            aria-label="Abrir carrito"
           >
-            🛒
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#b9d9ff] text-[#0f1117] text-[9px] font-bold rounded-full flex items-center justify-center">
-                {cartCount}
+            {/* Icono SVG carrito */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-200 group-hover:scale-110"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+
+            {/* Badge */}
+            {totalItems > 0 && (
+              <span
+                className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-0.5
+  bg-[#b9d9ff] text-[#0f1117] text-[9px] font-black rounded-full
+  flex items-center justify-center animate-pop"
+              >
+                {totalItems}
               </span>
             )}
-          </Link>
+          </button>
         </div>
       </div>
 

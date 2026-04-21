@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
 import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import CartDrawer from "./components/Cart/CartDrawer";
 import HomeScreen from "./screens/HomeScreen";
 import AboutScreen from "./screens/AboutScreen";
 import MenScreen from "./screens/MenScreen";
@@ -10,40 +12,44 @@ import WomenScreen from "./screens/WomenScreen";
 import KidsScreen from "./screens/KidsScreen";
 import NovedadesScreen from "./screens/NewsScreen";
 import CategoryScreen from "./screens/CategoryScreen";
+import ProductDetailScreen from "./screens/ProductDetailScreen";
+import CartScreen from "./screens/CartSreen";
 
 const App = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      {/* El Navbar persistente */}
-      <Navbar />
+    <CartProvider>
+      <Router>
+        <ScrollToTop />
+        <Navbar />
+        <CartDrawer />
 
-      <div className="min-h-screen bg-gray-50">
-        <main>
-          <Routes>
-            <Route path="/" element={<HomeScreen />} />
+        <div className="min-h-screen bg-gray-50">
+          <main>
+            <Routes>
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/hombres" element={<MenScreen />} />
+              <Route path="/mujeres" element={<WomenScreen />} />
+              <Route path="/ninos" element={<KidsScreen />} />
+              <Route path="/:gender/:category" element={<CategoryScreen />} />
+              <Route
+                path="/:gender/deporte/:sport"
+                element={<CategoryScreen />}
+              />
+              <Route
+                path="/:gender/tipo/:productType"
+                element={<CategoryScreen />}
+              />
+              <Route path="/product/:id" element={<ProductDetailScreen />} />
+              <Route path="/nosotros" element={<AboutScreen />} />
+              <Route path="/novedades" element={<NovedadesScreen />} />
+              <Route path="/carrito" element={<CartScreen />} />
+            </Routes>
+          </main>
+        </div>
 
-            <Route path="/hombres" element={<MenScreen />} />
-            <Route path="/mujeres" element={<WomenScreen />} />
-            <Route path="/ninos" element={<KidsScreen />} />
-            <Route path="/:gender/:category" element={<CategoryScreen />} />
-            <Route
-              path="/:gender/deporte/:sport"
-              element={<CategoryScreen />}
-            />
-            <Route
-              path="/:gender/tipo/:productType"
-              element={<CategoryScreen />}
-            />
-
-            <Route path="/nosotros" element={<AboutScreen />} />
-            <Route path="/novedades" element={<NovedadesScreen />} />
-          </Routes>
-        </main>
-      </div>
-
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </CartProvider>
   );
 };
 

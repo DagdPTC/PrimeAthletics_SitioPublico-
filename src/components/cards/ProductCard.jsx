@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const [activeVariant, setActiveVariant] = useState(
     product.variants?.[0] || null,
   );
 
+  const navigate = useNavigate();
+
   if (!activeVariant) return null;
 
-  // 🔥 DESCUENTO DINÁMICO
+  // 🔥 DESCUENTO
   const hasDiscount = product.discount > 0;
 
   const finalPrice = hasDiscount
@@ -18,16 +21,17 @@ const ProductCard = ({ product }) => {
   const isNewProduct = (date) => {
     const created = new Date(date);
     const now = new Date();
-
     const diffDays = (now - created) / (1000 * 60 * 60 * 24);
-
     return diffDays <= 60;
   };
 
   const isNew = isNewProduct(product.createdAt);
 
   return (
-    <div className="group cursor-pointer">
+    <div
+      className="group cursor-pointer"
+      onClick={() => navigate(`/product/${product.id}`)}
+    >
       {/* IMAGEN */}
       <div className="relative bg-gray-100 w-full aspect-square overflow-hidden">
         <img
@@ -53,16 +57,14 @@ const ProductCard = ({ product }) => {
 
       {/* INFO */}
       <div className="mt-3 space-y-1">
-        {/* NOMBRE */}
         <p className="text-sm font-medium">{product.name}</p>
 
-        {/* CATEGORÍA */}
         <p className="text-xs text-gray-500 capitalize">
           {product.product_type} de {product.sport || "entrenamiento"} para{" "}
           {product.gender}
         </p>
 
-        {/* 🔥 TEXTO OFF (OPCIONAL PRO) */}
+        {/* TEXTO OFF */}
         {hasDiscount && (
           <p className="text-xs text-red-500 font-medium">
             {product.discount}% OFF
@@ -70,7 +72,10 @@ const ProductCard = ({ product }) => {
         )}
 
         {/* COLORES */}
-        <div className="flex gap-2 mt-2">
+        <div
+          className="flex gap-2 mt-2"
+          onClick={(e) => e.stopPropagation()} // 🔥 IMPORTANTE
+        >
           {product.variants.map((variant, i) => (
             <button
               key={i}
@@ -85,16 +90,13 @@ const ProductCard = ({ product }) => {
           ))}
         </div>
 
-        {/* 💰 PRECIO */}
+        {/* PRECIO */}
         <div className="mt-2">
           {hasDiscount ? (
             <div className="flex items-center gap-2">
-              {/* PRECIO FINAL */}
               <span className="text-sm font-semibold text-red-600">
                 ${finalPrice}
               </span>
-
-              {/* PRECIO ORIGINAL */}
               <span className="text-xs text-gray-400 line-through">
                 ${product.price}
               </span>
