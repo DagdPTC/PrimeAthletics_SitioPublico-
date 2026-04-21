@@ -14,6 +14,8 @@ import NovedadesScreen from "./screens/NewsScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import ProductDetailScreen from "./screens/ProductDetailScreen";
 import CartScreen from "./screens/CartSreen";
+import OrderConfirmationScreen from "./screens/OrderConfirmationScreen";
+import CheckoutScreen from "./screens/CheckoutScreen";
 
 const App = () => {
   return (
@@ -40,6 +42,11 @@ const App = () => {
                 element={<CategoryScreen />}
               />
               <Route path="/product/:id" element={<ProductDetailScreen />} />
+              <Route path="/checkout" element={<CheckoutScreen />} />
+              <Route
+                path="/checkout/confirmacion"
+                element={<OrderConfirmationScreen />}
+              />
               <Route path="/nosotros" element={<AboutScreen />} />
               <Route path="/novedades" element={<NovedadesScreen />} />
               <Route path="/carrito" element={<CartScreen />} />

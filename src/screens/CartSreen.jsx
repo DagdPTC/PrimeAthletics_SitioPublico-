@@ -7,9 +7,7 @@ const CartScreen = () => {
   const navigate = useNavigate();
 
   const totalDiscount = cartItems.reduce((acc, i) => {
-    if (i.discount > 0) {
-      return acc + (i.originalPrice - i.price) * i.quantity;
-    }
+    if (i.discount > 0) return acc + (i.originalPrice - i.price) * i.quantity;
     return acc;
   }, 0);
 
@@ -25,7 +23,8 @@ const CartScreen = () => {
         </p>
         <button
           onClick={() => navigate("/")}
-          className="bg-black text-white px-8 py-3 text-sm font-semibold hover:bg-gray-800 transition-colors"
+          className="cursor-pointer bg-black text-white px-8 py-3 text-sm font-semibold
+            hover:bg-gray-800 transition-colors"
         >
           Ir a la tienda
         </button>
@@ -45,13 +44,14 @@ const CartScreen = () => {
           </h1>
           <button
             onClick={clearCart}
-            className="text-sm text-gray-400 hover:text-red-500 transition-colors"
+            className="cursor-pointer text-sm text-gray-400 hover:text-red-500 transition-colors"
           >
             Vaciar carrito
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8">
+        {/* Grid con altura explícita para que el sticky funcione */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-8 items-start">
           {/* Lista de productos */}
           <div className="flex flex-col gap-4">
             {cartItems.map((item) => (
@@ -59,7 +59,6 @@ const CartScreen = () => {
                 key={item.itemId}
                 className="bg-white p-5 flex gap-5 items-start"
               >
-                {/* Imagen */}
                 <div className="w-28 h-28 bg-gray-100 flex-shrink-0 overflow-hidden">
                   <img
                     src={item.image}
@@ -68,7 +67,6 @@ const CartScreen = () => {
                   />
                 </div>
 
-                {/* Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex justify-between items-start gap-4">
                     <div>
@@ -82,23 +80,26 @@ const CartScreen = () => {
                         Color: {item.color} · Talla: {item.size}
                       </p>
                     </div>
-
                     <button
                       onClick={() => removeFromCart(item.itemId)}
-                      className="text-gray-300 hover:text-red-500 transition-colors text-xl leading-none flex-shrink-0"
+                      className="cursor-pointer text-gray-300 hover:text-red-500
+                        transition-colors text-xl leading-none flex-shrink-0"
                     >
                       ×
                     </button>
                   </div>
 
                   <div className="flex items-center justify-between mt-4">
-                    {/* Cantidad */}
-                    <div className="flex items-center border border-gray-200">
+                    <div
+                      className="flex items-center border border-gray-200
+                      hover:border-gray-400 transition-colors"
+                    >
                       <button
                         onClick={() =>
                           updateQuantity(item.itemId, item.quantity - 1)
                         }
-                        className="w-9 h-9 text-gray-500 hover:text-black flex items-center justify-center transition-colors"
+                        className="cursor-pointer w-9 h-9 text-gray-500 hover:text-black
+                          flex items-center justify-center transition-colors"
                       >
                         −
                       </button>
@@ -109,13 +110,13 @@ const CartScreen = () => {
                         onClick={() =>
                           updateQuantity(item.itemId, item.quantity + 1)
                         }
-                        className="w-9 h-9 text-gray-500 hover:text-black flex items-center justify-center transition-colors"
+                        className="cursor-pointer w-9 h-9 text-gray-500 hover:text-black
+                          flex items-center justify-center transition-colors"
                       >
                         +
                       </button>
                     </div>
 
-                    {/* Precio */}
                     <div className="text-right">
                       <p className="font-bold text-gray-900 text-lg">
                         ${(item.price * item.quantity).toFixed(2)}
@@ -132,8 +133,8 @@ const CartScreen = () => {
             ))}
           </div>
 
-          {/* Resumen */}
-          <div className="bg-white p-6 h-fit sticky top-24">
+          {/* Resumen sticky — necesita sticky + top-24 + self-start en el padre con items-start */}
+          <div className="bg-white p-6 sticky top-24 self-start">
             <h2 className="font-bold text-gray-900 text-lg mb-6">
               Resumen del pedido
             </h2>
@@ -151,31 +152,33 @@ const CartScreen = () => {
               )}
               <div className="flex justify-between text-gray-600">
                 <span>Envío</span>
-                <span className="text-gray-400">Calculado después</span>
+                <span className="text-gray-400">Gratis</span>
               </div>
             </div>
 
-            <div className="border-t border-gray-100 mt-4 pt-4 flex justify-between font-bold text-gray-900 text-base">
+            <div
+              className="border-t border-gray-100 mt-4 pt-4 flex justify-between
+              font-bold text-gray-900 text-base"
+            >
               <span>Total</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
 
-            {/* Proceder al pago — sólido */}
             <button
-              className="cursor-pointer w-full bg-black text-white py-4 font-black text-sm mt-6
-  tracking-wide transition-all duration-200
-  hover:bg-[#b9d9ff] hover:text-[#0f1117] hover:shadow-[0_0_30px_rgba(185,217,255,0.2)]
-  active:scale-[0.99]"
+              onClick={() => navigate("/checkout")}
+              className="cursor-pointer w-full bg-[#0f1117] text-white py-4 font-black text-sm mt-6
+                tracking-wide transition-all duration-200
+                hover:bg-[#1a3a5c] hover:shadow-[0_0_28px_rgba(26,58,92,0.5)]
+                active:scale-[0.99]"
             >
               Proceder al pago
             </button>
 
-            {/* Seguir comprando — outline slide */}
             <button
               onClick={() => navigate(-1)}
-              className="btn-slide cursor-pointer w-full border border-[#b9d9ff]/30 hover:border-[#b9d9ff]
-    text-[#b9d9ff] py-3.5 text-sm mt-3 font-semibold
-    transition-colors duration-300 active:scale-[0.99]"
+              className="btn-slide cursor-pointer w-full border border-[#b9d9ff]/30
+                hover:border-[#4a7fa5] text-[#b9d9ff] py-3.5 text-sm mt-3 font-semibold
+                transition-colors duration-300 active:scale-[0.99]"
             >
               Seguir comprando
             </button>
