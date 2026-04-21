@@ -1,17 +1,54 @@
 import { useState } from "react";
 
 const ProductCard = ({ product }) => {
-  const [activeColor, setActiveColor] = useState(product.colors[0]);
+  const [activeVariant, setActiveVariant] = useState(
+    product.variants?.[0] || null,
+  );
+
+  if (!activeVariant) return null;
+
+  // 🔥 DESCUENTO DINÁMICO
+  const hasDiscount = product.discount > 0;
+
+  const finalPrice = hasDiscount
+    ? (product.price - (product.price * product.discount) / 100).toFixed(2)
+    : product.price;
+
+  // 🔥 NUEVO
+  const isNewProduct = (date) => {
+    const created = new Date(date);
+    const now = new Date();
+
+    const diffDays = (now - created) / (1000 * 60 * 60 * 24);
+
+    return diffDays <= 60;
+  };
+
+  const isNew = isNewProduct(product.createdAt);
 
   return (
     <div className="group cursor-pointer">
       {/* IMAGEN */}
-      <div className="bg-gray-100 w-full aspect-square overflow-hidden">
+      <div className="relative bg-gray-100 w-full aspect-square overflow-hidden">
         <img
-          src={activeColor.image}
+          src={activeVariant.images?.[0]}
           alt={product.name}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
         />
+
+        {/* DESCUENTO */}
+        {hasDiscount && (
+          <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+            -{product.discount}%
+          </div>
+        )}
+
+        {/* NUEVO */}
+        {isNew && !hasDiscount && (
+          <div className="absolute top-2 right-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">
+            Nuevo
+          </div>
+        )}
       </div>
 
       {/* INFO */}
@@ -25,22 +62,47 @@ const ProductCard = ({ product }) => {
           {product.gender}
         </p>
 
+        {/* 🔥 TEXTO OFF (OPCIONAL PRO) */}
+        {hasDiscount && (
+          <p className="text-xs text-red-500 font-medium">
+            {product.discount}% OFF
+          </p>
+        )}
+
         {/* COLORES */}
         <div className="flex gap-2 mt-2">
-          {product.colors.map((c, i) => (
+          {product.variants.map((variant, i) => (
             <button
               key={i}
-              onClick={() => setActiveColor(c)}
-              className={`w-4 h-4 rounded-full border ${
-                activeColor.name === c.name ? "border-black" : "border-gray-300"
+              onClick={() => setActiveVariant(variant)}
+              className={`w-4 h-4 rounded-full border-2 transition ${
+                activeVariant.color === variant.color
+                  ? "border-black scale-110"
+                  : "border-gray-300"
               }`}
-              style={{ backgroundColor: c.name }}
+              style={{ backgroundColor: variant.color }}
             />
           ))}
         </div>
 
-        {/* PRECIO */}
-        <p className="text-sm font-semibold mt-2">${product.price}</p>
+        {/* 💰 PRECIO */}
+        <div className="mt-2">
+          {hasDiscount ? (
+            <div className="flex items-center gap-2">
+              {/* PRECIO FINAL */}
+              <span className="text-sm font-semibold text-red-600">
+                ${finalPrice}
+              </span>
+
+              {/* PRECIO ORIGINAL */}
+              <span className="text-xs text-gray-400 line-through">
+                ${product.price}
+              </span>
+            </div>
+          ) : (
+            <p className="text-sm font-semibold">${product.price}</p>
+          )}
+        </div>
       </div>
     </div>
   );

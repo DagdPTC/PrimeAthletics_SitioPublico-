@@ -5,17 +5,17 @@ import HorizontalBanner from "../components/cards/HorizontalBanner";
 import CategoryGridCard from "../components/cards/CategoryGridCard";
 
 // IMAGENES
-import menTennis from "../assets/images/menImages/tenis-hombre.png";
-import menClothing from "../assets/images/menImages/ropa-hombre.png";
-import futballClothes from "../assets/images/menImages/ropa-futbol.png";
-import basketClothes from "../assets/images/menImages/ropa-basquet.png";
-import volleyClothes from "../assets/images/menImages/ropa-volley.png";
-import newBasketShoes from "../assets/images/menImages/lanzamientos-hombre.png";
-import offers from "../assets/images/menImages/ofertas.png";
-import tshirt from "../assets/images/menImages/camiseta-hombre.png";
-import shorts from "../assets/images/menImages/shorts-hombre.png";
-import pants from "../assets/images/menImages/pants-hombre.png";
-import socks from "../assets/images/menImages/socks-hombre.png";
+import menTennis from "/img/menImages/tenis-hombre.png";
+import menClothing from "/img/menImages/ropa-hombre.png";
+import futballClothes from "/img/menImages/ropa-futbol.png";
+import basketClothes from "/img/menImages/ropa-basquet.png";
+import volleyClothes from "/img/menImages/ropa-volley.png";
+import newBasketShoes from "/img/menImages/lanzamientos-hombre.png";
+import offers from "/img/menImages/ofertas.png";
+import tshirt from "/img/menImages/camiseta-hombre.png";
+import shorts from "/img/menImages/shorts-hombre.png";
+import pants from "/img/menImages/pants-hombre.png";
+import socks from "/img/menImages/socks-hombre.png";
 
 const MenScreen = () => {
   return (
@@ -84,17 +84,19 @@ const MenScreen = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <SportCard
             label="Fútbol"
-            to="/hombres/futbol"
+            to="/hombres/deporte/football"
             image={futballClothes}
           />
+
           <SportCard
             label="Basketball"
-            to="/hombres/basketball"
+            to="/hombres/deporte/basketball"
             image={basketClothes}
           />
+
           <SportCard
             label="Volleyball"
-            to="/hombres/volleyball"
+            to="/hombres/deporte/volleyball"
             image={volleyClothes}
           />
         </div>
@@ -112,21 +114,25 @@ const MenScreen = () => {
 
         {/* GRID CATEGORÍAS FULL SCREEN */}
         <div className="w-full h-screen grid grid-cols-2 grid-rows-2 gap-2 mt-20">
-          <CategoryGridCard image={pants} label="Pants" to="/hombres/pants" />
           <CategoryGridCard
-            image={socks}
-            label="Calcetas"
-            to="/hombres/calcetas"
-          />
-          <CategoryGridCard
-            image={tshirt}
-            label="Camisetas"
-            to="/hombres/camisetas"
-          />
-          <CategoryGridCard
-            image={shorts}
             label="Shorts"
-            to="/hombres/shorts"
+            to="/hombres/tipo/short"
+            image={shorts}
+          />
+          <CategoryGridCard
+            label="Pants"
+            to="/hombres/tipo/pants"
+            image={pants}
+          />
+          <CategoryGridCard
+            label="Camisetas"
+            to="/hombres/tipo/camiseta"
+            image={tshirt}
+          />
+          <CategoryGridCard
+            label="Calcetas"
+            to="/hombres/tipo/calcetas"
+            image={socks}
           />
         </div>
       </div>

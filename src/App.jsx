@@ -27,6 +27,14 @@ const App = () => {
             <Route path="/mujeres" element={<WomenScreen />} />
             <Route path="/ninos" element={<KidsScreen />} />
             <Route path="/:gender/:category" element={<CategoryScreen />} />
+            <Route
+              path="/:gender/deporte/:sport"
+              element={<CategoryScreen />}
+            />
+            <Route
+              path="/:gender/tipo/:productType"
+              element={<CategoryScreen />}
+            />
 
             <Route path="/nosotros" element={<AboutScreen />} />
             <Route path="/novedades" element={<NovedadesScreen />} />
