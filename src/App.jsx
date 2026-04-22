@@ -16,6 +16,7 @@ import ProductDetailScreen from "./screens/ProductDetailScreen";
 import CartScreen from "./screens/CartSreen";
 import OrderConfirmationScreen from "./screens/OrderConfirmationScreen";
 import CheckoutScreen from "./screens/CheckoutScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <div className="min-h-screen bg-gray-50">
           <main>
             <Routes>
+              <Route path="/login" element={<LoginScreen />} />
               <Route path="/" element={<HomeScreen />} />
               <Route path="/hombres" element={<MenScreen />} />
               <Route path="/mujeres" element={<WomenScreen />} />
