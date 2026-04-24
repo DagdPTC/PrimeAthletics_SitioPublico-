@@ -1,21 +1,29 @@
+import { useNavigate } from "react-router-dom";
+
 function LoginCard() {
+  const navigate = useNavigate(); // 🔥 sirve para redirigir
+
   return (
     <div className="bg-white w-[400px] rounded-3xl p-8 shadow-xl text-center">
 
-      {/* Logo */}
+    
       <div className="mb-6">
         <h1 className="text-2xl font-bold">PRIME</h1>
         <p className="text-xs tracking-widest text-gray-500">ATHLETICS</p>
       </div>
 
-      {/* Título */}
+      
       <h2 className="text-lg font-semibold mb-6">
         Iniciar sesión:
       </h2>
 
-      {/* Formulario */}
-      <form className="space-y-4">
+     
+      <form
+        className="space-y-4"
+        onSubmit={(e) => e.preventDefault()} // ❗ evita recargar la página
+      >
 
+     
         <div className="text-left">
           <label className="text-sm">Correo electronico:</label>
           <input
@@ -32,14 +40,24 @@ function LoginCard() {
           />
         </div>
 
-        {/* Links */}
+      
         <div className="flex justify-between text-xs text-gray-600">
-          <span className="cursor-pointer hover:underline">
+          
+          {/* 🔥 OLVIDASTE CONTRASEÑA */}
+          <span
+            onClick={() => navigate("/recuperar")}
+            className="cursor-pointer hover:underline"
+          >
             ¿Has olvidado la contraseña?
           </span>
-          <span className="cursor-pointer hover:underline">
-            Crear una cuenta
-          </span>
+
+          
+          <span
+          onClick={() => navigate("/registro")}
+          className="cursor-pointer hover:underline"
+        >
+          Crear una cuenta
+</span>
         </div>
 
         {/* Botón */}

@@ -17,6 +17,9 @@ import CartScreen from "./screens/CartSreen";
 import OrderConfirmationScreen from "./screens/OrderConfirmationScreen";
 import CheckoutScreen from "./screens/CheckoutScreen";
 import LoginScreen from "./screens/LoginScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import CodeVerificationScreen from "./screens/CodeVerificationScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const App = () => {
   return (
@@ -52,6 +55,10 @@ const App = () => {
               <Route path="/nosotros" element={<AboutScreen />} />
               <Route path="/novedades" element={<NovedadesScreen />} />
               <Route path="/carrito" element={<CartScreen />} />
+              <Route path="/recuperar" element={<ForgotPasswordScreen />} />
+              <Route path="/verificacion" element={<CodeVerificationScreen />} />
+              <Route path="/registro" element={<RegisterScreen />} />
+
             </Routes>
           </main>
         </div>
