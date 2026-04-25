@@ -21,6 +21,7 @@ import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import CodeVerificationScreen from "./screens/CodeVerificationScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 
+
 const App = () => {
   return (
     <CartProvider>
