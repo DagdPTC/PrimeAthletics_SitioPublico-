@@ -228,10 +228,6 @@ const Navbar = () => {
         isOpen={!!activeMenu}
         onMouseEnter={() => handleMouseEnter(activeMenu)}
         onMouseLeave={handleMouseLeave}
-        onCategoryClick={(slug) => {
-          navigate(`/${activeMenu}/${slug}`);
-          setActiveMenu(null);
-        }}
       />
     </header>
   );

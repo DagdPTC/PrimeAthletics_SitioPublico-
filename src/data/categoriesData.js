@@ -1,57 +1,142 @@
-export const categories = {
-  zapatos: {
-    label: "Zapatos",
-    slug: "zapatos",
-    description: "Rendimiento al límite",
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80",
-    items: [
-      { label: "Running", slug: "running" },
-      { label: "Caminar", slug: "caminar" },
-      { label: "Yoga", slug: "yoga" },
-      { label: "Pilates", slug: "pilates" },
-      { label: "Montaña", slug: "montana" },
-    ],
+// Estructura del megamenu por género
+// Las rutas generadas serán: /:gender/:category, /:gender/deporte/:sport, /:gender/tipo/:productType
+
+export const megaMenuData = {
+  hombres: {
+    novedades: {
+      label: "Novedades",
+      links: [
+        { label: "Nuevos ingresos", path: "/novedades" },
+        { label: "Más vendidos", path: "/hombres/mas-vendidos" },
+        { label: "Ofertas", path: "/hombres/ofertas" },
+      ],
+    },
+    categorias: {
+      label: "Categorías",
+      links: [
+        { label: "Ropa", path: "/hombres/ropa" },
+        { label: "Zapatos", path: "/hombres/zapatos" },
+      ],
+    },
+    ropa: {
+      label: "Ropa",
+      links: [
+        { label: "Camisetas", path: "/hombres/tipo/camiseta" },
+        { label: "Pants", path: "/hombres/tipo/pants" },
+        { label: "Shorts", path: "/hombres/tipo/short" },
+        { label: "Calcetas", path: "/hombres/tipo/calcetas" },
+      ],
+    },
+    zapatos: {
+      label: "Zapatos por deporte",
+      links: [
+        { label: "Fútbol Turf", path: "/hombres/deporte/football_turf" },
+        { label: "Fútbol Indoor", path: "/hombres/deporte/football_indoor" },
+        { label: "Basketball", path: "/hombres/deporte/basketball" },
+        { label: "Running", path: "/hombres/deporte/running" },
+        { label: "Volleyball", path: "/hombres/deporte/volleyball" },
+        { label: "Crossfit", path: "/hombres/deporte/crossfit" },
+        { label: "Trail Running", path: "/hombres/deporte/trail_running" },
+      ],
+    },
   },
-  utencilios: {
-    label: "Utensilios",
-    slug: "utencilios",
-    description: "Equipo profesional",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
-    items: [
-      { label: "Balones", slug: "balones" },
-      { label: "Pesas", slug: "pesas" },
-      { label: "Cintas elásticas", slug: "cintas" },
-    ],
+
+  mujeres: {
+    novedades: {
+      label: "Novedades",
+      links: [
+        { label: "Nuevos ingresos", path: "/novedades" },
+        { label: "Más vendidos", path: "/mujeres/mas-vendidos" },
+        { label: "Ofertas", path: "/mujeres/ofertas" },
+      ],
+    },
+    categorias: {
+      label: "Categorías",
+      links: [
+        { label: "Ropa", path: "/mujeres/ropa" },
+        { label: "Zapatos", path: "/mujeres/zapatos" },
+      ],
+    },
+    ropa: {
+      label: "Ropa",
+      links: [
+        { label: "Camisetas", path: "/mujeres/tipo/camiseta" },
+        { label: "Pants", path: "/mujeres/tipo/pants" },
+        { label: "Shorts", path: "/mujeres/tipo/short" },
+        { label: "Calcetas", path: "/mujeres/tipo/calcetas" },
+      ],
+    },
+    zapatos: {
+      label: "Zapatos por deporte",
+      links: [
+        { label: "Running", path: "/mujeres/deporte/running" },
+        { label: "Volleyball", path: "/mujeres/deporte/volleyball" },
+        { label: "Crossfit", path: "/mujeres/deporte/crossfit" },
+        { label: "Trail Running", path: "/mujeres/deporte/trail_running" },
+        { label: "Fútbol Turf", path: "/mujeres/deporte/football_turf" },
+        { label: "Basketball", path: "/mujeres/deporte/basketball" },
+      ],
+    },
   },
+
+  ninos: {
+    novedades: {
+      label: "Novedades",
+      links: [
+        { label: "Nuevos ingresos", path: "/novedades" },
+        { label: "Más vendidos", path: "/ninos/mas-vendidos" },
+        { label: "Ofertas", path: "/ninos/ofertas" },
+      ],
+    },
+    categorias: {
+      label: "Categorías",
+      links: [
+        { label: "Ropa", path: "/ninos/ropa" },
+        { label: "Zapatos", path: "/ninos/zapatos" },
+      ],
+    },
+    ropa: {
+      label: "Ropa",
+      links: [
+        { label: "Camisetas", path: "/ninos/tipo/camiseta" },
+        { label: "Pants", path: "/ninos/tipo/pants" },
+        { label: "Shorts", path: "/ninos/tipo/short" },
+        { label: "Calcetas", path: "/ninos/tipo/calcetas" },
+      ],
+    },
+    zapatos: {
+      label: "Zapatos por deporte",
+      links: [
+        { label: "Fútbol Turf", path: "/ninos/deporte/football_turf" },
+        { label: "Fútbol Indoor", path: "/ninos/deporte/football_indoor" },
+        { label: "Basketball", path: "/ninos/deporte/basketball" },
+        { label: "Running", path: "/ninos/deporte/running" },
+        { label: "Volleyball", path: "/ninos/deporte/volleyball" },
+      ],
+    },
+  },
+};
+
+// — Lo de abajo lo mantienes si algo más lo importa —
+export const taxonomy = {
   ropa: {
-    label: "Ropa Deportiva",
-    slug: "ropa",
-    description: "Estilo en movimiento",
-    image:
-      "https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=80",
-    items: [
-      { label: "Camisetas", slug: "camisetas" },
-      { label: "Pants", slug: "pants" },
-      { label: "Shorts", slug: "shorts" },
+    productTypes: ["camiseta", "pants", "short", "calcetas"],
+    sports: ["training", "gym", "running"],
+  },
+  zapatos: {
+    productTypes: ["tenis", "sandalias"],
+    sports: [
+      "running",
+      "basketball",
+      "football_turf",
+      "football_indoor",
+      "volleyball",
+      "crossfit",
+      "trail_running",
     ],
   },
 };
 
-export const featuredProducts = [
-  {
-    label: "Zapatos Jordan última edición",
-    slug: "jordan-ultima-edicion",
-    tag: "Nuevo",
-  },
-  { label: "Balón Mikasa", slug: "balon-mikasa", tag: null },
-  { label: "Tacos colab Vinicius Jr", slug: "tacos-vinicius-jr", tag: "Colab" },
-  { label: "Mancuernas 50 Lbs", slug: "mancuernas-50lbs", tag: null },
-  { label: "Calcetines Cr7", slug: "calcetines-cr7", tag: null },
-];
+export const brands = ["nike", "adidas", "puma"];
 
-// Array plano de TODAS las subcategorías (para el CategoryFilterBar)
-export const allSubcategories = Object.values(categories).flatMap(
-  ({ items, label: parent }) => items.map((item) => ({ ...item, parent })),
-);
+export const allSubcategories = [];
