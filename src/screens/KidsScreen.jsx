@@ -4,17 +4,17 @@ import SportCard from "../components/cards/SportCard";
 import HorizontalBanner from "../components/cards/HorizontalBanner";
 import CategoryGridCard from "../components/cards/CategoryGridCard";
 //IMAGENES
-import womenTennis from "/img/womenImages/tenis-mujer.png";
-import womenClothing from "/img/womenImages/ropa-mujer.png";
-import footballClothes from "/img/womenImages/futbol-mujer.png";
-import basketClothes from "/img/womenImages/basquet-mujer.png";
-import volleyClothes from "/img/womenImages/volley-mujer.png";
-import newBasketShoes from "/img/womenImages/lanzamientos-mujer.png";
-import offers from "/img/womenImages/ofertas-mujer.png";
-import tshirt from "/img/womenImages/camiseta-mujer.png";
-import shorts from "/img/womenImages/shorts-mujer.png";
-import pants from "/img/womenImages/pants-mujer.png";
-import socks from "/img/womenImages/socks-mujer.png";
+import kidsTennis from "/img/kidsImages/tenis-kids.png";
+import kidsClothing from "/img/kidsImages/ropa-kids.png";
+import footballClothes from "/img/kidsImages/futbol-kids.png";
+import basketClothes from "/img/kidsImages/basket-kids.png";
+import volleyClothes from "/img/kidsImages/volley-kids.png";
+import newBasketShoes from "/img/kidsImages/lanzamientos-kids.png";
+import offers from "/img/kidsImages/ofertas-kids.png";
+import tshirt from "/img/kidsImages/camiseta-kids.png";
+import shorts from "/img/kidsImages/shorts-kids.png";
+import pants from "/img/kidsImages/pants-kids.png";
+import socks from "/img/kidsImages/socks-kids.png";
 
 const KidsScreen = () => {
   return (
@@ -53,15 +53,15 @@ const KidsScreen = () => {
         {/* CARDS GRANDES */}
         <div className="grid grid-cols-2 gap-5 mb-20">
           <LargeCategoryCard
-            label="Tenis para Mujer"
+            label="Tenis para Niños"
             to="/ninos/zapatos"
-            image={womenTennis}
+            image={kidsTennis}
           />
 
           <LargeCategoryCard
-            label="Ropa para Mujer"
+            label="Ropa para Niños"
             to="/ninos/ropa"
-            image={womenClothing}
+            image={kidsClothing}
           />
         </div>
 
