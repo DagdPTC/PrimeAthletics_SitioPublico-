@@ -17,7 +17,7 @@ function LoginCard() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:4000/api/loginCustomer",
+        "http://localhost:4000/api/loginCustomers",
         {
           method: "POST",
           headers: {
@@ -40,7 +40,7 @@ function LoginCard() {
 
       alert(data.message);
 
-      navigate("/dashboard");
+      navigate("/");
 
     } catch (error) {
 
