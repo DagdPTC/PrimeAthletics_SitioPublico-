@@ -3,6 +3,8 @@ import LargeCategoryCard from "../components/cards/LargeCategoryCard";
 import SportCard from "../components/cards/SportCard";
 import HorizontalBanner from "../components/cards/HorizontalBanner";
 import CategoryGridCard from "../components/cards/CategoryGridCard";
+import { useProducts } from "../hooks/useProducts.js";
+import { getProducts } from "../services/products";
 
 // IMAGENES
 import menTennis from "/img/menImages/tenis-hombre.png";
@@ -18,6 +20,15 @@ import pants from "/img/menImages/pants-hombre.png";
 import socks from "/img/menImages/socks-hombre.png";
 
 const MenScreen = () => {
+  const { products, loading } = useProducts();
+
+  const menProducts = products.filter((product) => product.gender === "hombre");
+
+  const offers = products.filter((product) => {
+    const value = parseInt(product.discount);
+    return value > 0;
+  });
+
   return (
     <div className="bg-white text-black min-h-screen">
       {/* SUBMENU */}

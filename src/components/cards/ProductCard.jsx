@@ -10,14 +10,12 @@ const ProductCard = ({ product }) => {
 
   if (!activeVariant) return null;
 
-  // 🔥 DESCUENTO
   const hasDiscount = product.discount > 0;
 
   const finalPrice = hasDiscount
     ? (product.price - (product.price * product.discount) / 100).toFixed(2)
     : product.price;
 
-  // 🔥 NUEVO
   const isNewProduct = (date) => {
     const created = new Date(date);
     const now = new Date();
