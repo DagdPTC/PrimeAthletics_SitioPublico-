@@ -28,12 +28,12 @@ const ProductCard = ({ product }) => {
   return (
     <div
       className="group cursor-pointer"
-      onClick={() => navigate(`/product/${product.id}`)}
+      onClick={() => navigate(`/product/${product._id}`)}
     >
       {/* IMAGEN */}
       <div className="relative bg-gray-100 w-full aspect-square overflow-hidden">
         <img
-          src={activeVariant.images?.[0]}
+          src={activeVariant.images?.[0]?.url}
           alt={product.name}
           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
         />

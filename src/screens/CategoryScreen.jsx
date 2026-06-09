@@ -94,6 +94,8 @@ const CategoryScreen = () => {
     [filteredProducts, sort],
   );
 
+  console.log(sortedProducts);
+
   // 🔥 TÍTULO DINÁMICO
   const getTitle = () => {
     if (category === "ofertas") return "Ofertas";
@@ -174,7 +176,7 @@ const CategoryScreen = () => {
       {/* GRID */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
         {sortedProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
     </div>
