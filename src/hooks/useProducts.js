@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/productService.js";
 
 export const useProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadProducts();
-  }, []);
+    const getData = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/products");
 
-  const loadProducts = async () => {
-    try {
-      const data = await getProducts();
-      setProducts(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+        const data = await response.json();
+
+        setProducts(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getData();
+  }, []);
 
   return {
     products,
     loading,
-    loadProducts,
   };
 };

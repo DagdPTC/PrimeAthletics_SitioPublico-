@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useMemo } from "react";
-import { products } from "../data/products.js";
+import { useProducts } from "../hooks/useProducts.js";
 import { filterConfig } from "../data/filterConfig.js";
 import {
   getAvailableFilters,
@@ -15,6 +15,8 @@ import ProductCard from "../components/cards/ProductCard.jsx";
 
 const CategoryScreen = () => {
   const { gender, category, sport, productType } = useParams();
+
+  const { products, loading } = useProducts();
 
   const [activeFilters, setActiveFilters] = useState({});
   const [sort, setSort] = useState("default");

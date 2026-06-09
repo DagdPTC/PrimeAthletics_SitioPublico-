@@ -4,7 +4,6 @@ import SportCard from "../components/cards/SportCard";
 import HorizontalBanner from "../components/cards/HorizontalBanner";
 import CategoryGridCard from "../components/cards/CategoryGridCard";
 import { useProducts } from "../hooks/useProducts.js";
-import { getProducts } from "../services/products";
 
 // IMAGENES
 import menTennis from "/img/menImages/tenis-hombre.png";
@@ -13,7 +12,7 @@ import futballClothes from "/img/menImages/ropa-futbol.png";
 import basketClothes from "/img/menImages/ropa-basquet.png";
 import volleyClothes from "/img/menImages/ropa-volley.png";
 import newBasketShoes from "/img/menImages/lanzamientos-hombre.png";
-import offers from "/img/menImages/ofertas.png";
+import offersBanner from "/img/menImages/ofertas.png";
 import tshirt from "/img/menImages/camiseta-hombre.png";
 import shorts from "/img/menImages/shorts-hombre.png";
 import pants from "/img/menImages/pants-hombre.png";
@@ -35,7 +34,7 @@ const MenScreen = () => {
       <SubMenu title="Hombres" base="/hombres" />
 
       <div className="mb-20">
-        <HorizontalBanner image={offers} to="/hombres/ofertas" />
+        <HorizontalBanner image={offersBanner} to="/hombres/ofertas" />
       </div>
 
       {/* BANNER DESTACADO */}
