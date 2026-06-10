@@ -11,8 +11,11 @@ export const CartProvider = ({ children }) => {
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
 
+  // Ubica tu función addToCart dentro de CartProvider y reemplázala por esta:
   const addToCart = (product, variant, size) => {
-    const itemId = `${product.id}-${variant.color}-${size}`;
+    // 1. Usar product._id en lugar de product.id
+    const itemId = `${product._id}-${variant.color}-${size}`;
+
     setCartItems((prev) => {
       const existing = prev.find((i) => i.itemId === itemId);
       if (existing) {
@@ -20,6 +23,7 @@ export const CartProvider = ({ children }) => {
           i.itemId === itemId ? { ...i, quantity: i.quantity + 1 } : i,
         );
       }
+
       const finalPrice =
         product.discount > 0
           ? +(product.price - (product.price * product.discount) / 100).toFixed(
@@ -31,13 +35,13 @@ export const CartProvider = ({ children }) => {
         ...prev,
         {
           itemId,
-          productId: product.id,
+          productId: product._id, // 🔥 Cambiado a ._id
           name: product.name,
           brand: product.brand,
           price: finalPrice,
           originalPrice: product.price,
           discount: product.discount,
-          image: variant.images[0],
+          image: variant.images[0]?.url,
           color: variant.color,
           size,
           quantity: 1,

@@ -12,7 +12,7 @@ const VariantSelector = ({
           key={i}
           onClick={() => {
             setActiveVariant(variant);
-            setActiveImage(variant.images[0]);
+            setActiveImage(variant.images[0]); // Mantiene el objeto actual en la pantalla principal
             setSelectedSize(null);
           }}
           className={`border-2 p-1 ${
@@ -23,8 +23,9 @@ const VariantSelector = ({
         >
           <div className="w-16 aspect-square flex items-center justify-center">
             <img
-              src={variant.images[0]}
+              src={variant.images[0]?.url}
               className="w-full h-full object-contain"
+              alt={variant.color}
             />
           </div>
         </button>
