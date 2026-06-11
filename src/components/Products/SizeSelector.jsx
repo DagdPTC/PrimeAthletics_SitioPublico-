@@ -8,7 +8,7 @@ const SizeSelector = ({ sizes, selectedSize, setSelectedSize }) => {
             key={i}
             disabled={s.stock === 0}
             onClick={() => setSelectedSize(s.size)}
-            className={`border py-3 text-sm ${
+            className={`border py-3 text-sm cursor-pointer ${
               s.stock === 0
                 ? "bg-gray-100 text-gray-400 cursor-not-allowed line-through"
                 : selectedSize === s.size
