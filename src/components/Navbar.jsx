@@ -38,7 +38,6 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full bg-[#0f1117] border-b border-white/8">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-
           {/* LOGO */}
           <Link
             to="/"
@@ -49,7 +48,6 @@ const Navbar = () => {
 
           {/* NAV */}
           <nav className="hidden md:flex items-center gap-8 h-full">
-
             {/* INICIO */}
             <NavLink
               to="/"
@@ -179,7 +177,6 @@ const Navbar = () => {
 
           {/* LOGIN + CARRITO */}
           <div className="flex items-center gap-4">
-
             {/* BOTÓN LOGIN */}
             <button
               onClick={() => navigate("/login")}
@@ -217,7 +214,6 @@ const Navbar = () => {
                 </span>
               )}
             </button>
-
           </div>
         </div>
       </div>

@@ -1,36 +1,24 @@
 import { useNavigate } from "react-router-dom";
 
-function NovedadesCards() {
+function NovedadesCards({ cards }) {
   const navigate = useNavigate();
-
-  const cards = [
-    {
-      title: "Colaboracion mas reciente",
-      img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80", // zapatillas
-      slug: "zapatos"
-    },
-    {
-      title: "Colaboracion mas reciente",
-      img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/635805/01/mod01/fnd/CHL/w/640/h/640/fmt/png", 
-      slug: "ropa"
-    },
-  ];
 
   return (
     <div className="grid grid-cols-2 gap-6">
-      {cards.map((card, i) => (
+      {cards.map((card) => (
         <div
-          key={i}
-          onClick={() => navigate(`/productos/${card.slug}`)}
-          className="relative h-[450px] rounded-xl overflow-hidden cursor-pointer"
+          key={card._id}
+          onClick={() => navigate("/hombres/ropa")}
+          className="relative h-[450px] rounded-xl overflow-hidden cursor-pointer group"
         >
           <img
-            src={card.img}
-            className="w-full h-full object-cover hover:scale-105 transition duration-300"
+            src={card.cardImage}
+            alt={card.title}
+            className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
           />
 
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-            <h3 className="text-white text-sm font-medium">
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <h3 className="text-white text-lg font-semibold">
               {card.title}
             </h3>
           </div>
