@@ -10,3 +10,18 @@ export const getReviewsByProduct = async (productId) => {
   }
   return response.json();
 };
+
+export const insertReview = async (reviewData) => {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(reviewData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Error al guardar la reseña en el servidor");
+  }
+  return response.json();
+};
