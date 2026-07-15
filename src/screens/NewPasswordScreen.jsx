@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ForgotPasswordScreen() {
+function NewPasswordScreen() {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-  const recoveryPassword = async (e) => {
+  const changePassword = async (e) => {
     e.preventDefault();
 
     try {
       const response = await fetch(
-        "http://localhost:4000/api/recoveryPasswordCustomer/requestCode",
+        "http://localhost:4000/api/recoveryPasswordCustomer/newPassword",
         {
           method: "POST",
           headers: {
@@ -19,7 +20,8 @@ function ForgotPasswordScreen() {
           },
           credentials: "include",
           body: JSON.stringify({
-            email,
+            newPassword,
+            confirmNewPassword,
           }),
         }
       );
@@ -29,12 +31,7 @@ function ForgotPasswordScreen() {
       if (response.ok) {
         alert(data.message);
 
-        // Ir a la pantalla donde ingresa el código
-       navigate("/verificacion", {
-        state: {
-        type: "recovery",
-       },
-        }); 
+        navigate("/login");
       } else {
         alert(data.message);
       }
@@ -46,7 +43,6 @@ function ForgotPasswordScreen() {
 
   return (
     <div className="h-screen w-full relative">
-
       {/* Fondo */}
       <img
         src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&q=80"
@@ -68,25 +64,41 @@ function ForgotPasswordScreen() {
           </p>
 
           <h2 className="text-lg font-semibold mb-2">
-            Recuperar contraseña
+            Nueva contraseña
           </h2>
 
           <p className="text-sm text-gray-600 mb-6">
-            Por favor, ingresa el correo de la cuenta que deseas recuperar.
+            Ingresa tu nueva contraseña y confírmala para finalizar la recuperación.
           </p>
 
-          <form onSubmit={recoveryPassword}>
+          <form onSubmit={changePassword}>
 
-            <div className="text-left mb-6">
+            {/* Nueva contraseña */}
+            <div className="text-left mb-4">
               <label className="text-sm">
-                Correo electrónico
+                Nueva contraseña
               </label>
 
               <input
-                type="email"
+                type="password"
                 required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="w-full mt-1 p-2 rounded-lg bg-gray-200 outline-none"
+              />
+            </div>
+
+            {/* Confirmar contraseña */}
+            <div className="text-left mb-6">
+              <label className="text-sm">
+                Confirmar contraseña
+              </label>
+
+              <input
+                type="password"
+                required
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
                 className="w-full mt-1 p-2 rounded-lg bg-gray-200 outline-none"
               />
             </div>
@@ -95,7 +107,7 @@ function ForgotPasswordScreen() {
               type="submit"
               className="w-full bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600 transition"
             >
-              Aceptar
+              Cambiar contraseña
             </button>
 
           </form>
@@ -106,4 +118,4 @@ function ForgotPasswordScreen() {
   );
 }
 
-export default ForgotPasswordScreen;
+export default NewPasswordScreen;

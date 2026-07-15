@@ -20,6 +20,7 @@ import LoginScreen from "./screens/LoginScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import CodeVerificationScreen from "./screens/CodeVerificationScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import NewPasswordScreen from "./screens/NewPasswordScreen";
 
 
 const App = () => {
@@ -57,6 +58,7 @@ const App = () => {
               <Route path="/novedades" element={<NovedadesScreen />} />
               <Route path="/carrito" element={<CartScreen />} />
               <Route path="/recuperar" element={<ForgotPasswordScreen />} />
+              <Route path="/nuevaContraseña" element={<NewPasswordScreen/>} />
               <Route path="/verificacion" element={<CodeVerificationScreen />} />
               <Route path="/registro" element={<RegisterScreen />} />
 
