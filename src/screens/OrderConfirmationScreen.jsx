@@ -1,8 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const OrderConfirmationScreen = () => {
   const navigate = useNavigate();
-  const orderNumber = `PA-${Math.floor(100000 + Math.random() * 900000)}`;
+  const location = useLocation();
+  const orderId = location.state?.orderId;
+
+  const orderNumber = orderId
+    ? `PA-${orderId.slice(-6).toUpperCase()}`
+    : "PA-000000";
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
@@ -37,10 +42,6 @@ const OrderConfirmationScreen = () => {
         <p className="text-[#4a7fa5] font-black text-lg tracking-wider mb-6">
           {orderNumber}
         </p>
-        <p className="text-gray-400 text-xs mb-10">
-          Recibirás un correo de confirmación con los detalles de tu pedido y la
-          información de seguimiento cuando sea despachado.
-        </p>
 
         <div className="flex flex-col gap-3">
           <button
@@ -51,7 +52,7 @@ const OrderConfirmationScreen = () => {
             Seguir comprando
           </button>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/mis-pedidos")}
             className="btn-slide cursor-pointer w-full border border-[#4a7fa5]/40 hover:border-[#4a7fa5]
               text-[#4a7fa5] font-semibold py-3.5 text-sm tracking-wide
               transition-colors duration-300"

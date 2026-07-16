@@ -17,6 +17,7 @@ const CartDrawer = () => {
     closeDrawer();
     navigate("/carrito");
   };
+
   const handleCheckout = () => {
     closeDrawer();
     navigate("/checkout");

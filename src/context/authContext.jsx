@@ -6,233 +6,115 @@ const AuthContext = createContext(null);
 export { AuthContext };
 
 const API_URL = "http://localhost:4000/api";
-const STORAGE_KEY = "accessToken";
-const REMEMBER_KEY = "rememberDevice";
-
-const decodeJwtPayload = (token) => {
-    if (!token) {
-        return null;
-    }
-
-    try {
-        const tokenParts = token.split(".");
-        if (tokenParts.length !== 3) {
-            return null;
-        }
-
-        const base64Url = tokenParts[1];
-        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-        const normalized = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=");
-        return JSON.parse(atob(normalized));
-    } catch {
-        return null;
-    }
-};
-
-const extractAuthData = (payload) => {
-    if (!payload || typeof payload !== "object") {
-        return { accessToken: null, user: null };
-    }
-
-    const data = payload.data && typeof payload.data === "object" ? payload.data : payload;
-    return {
-        accessToken: data.accessToken || data.token || null,
-        user: data.user || null,
-    };
-};
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [authCookie, setAuthCookie] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const getStoredToken = useCallback(
-        () => localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY),
-        [],
-    );
+  const clearSession = useCallback(() => {
+    setUser(null);
+  }, []);
 
-    const persistToken = useCallback((token, rememberMe) => {
-        if (!token) {
-            return;
+  const logout = useCallback(
+    async (options = {}) => {
+      const reason = options?.reason || "manual";
+
+      try {
+        await fetch(`${API_URL}/logout`, {
+          method: "POST",
+          credentials: "include",
+        });
+      } catch (error) {
+        // Error silencioso
+      } finally {
+        clearSession();
+        navigate("/");
+
+        if (reason === "expired") {
+          toast.error("Tu sesión expiró. Inicia sesión nuevamente");
+        } else {
+          toast.success("Sesión cerrada correctamente");
         }
-
-        if (rememberMe) {
-            localStorage.setItem(STORAGE_KEY, token);
-            sessionStorage.removeItem(STORAGE_KEY);
-            localStorage.setItem(REMEMBER_KEY, "1");
-            return;
-        }
-
-        sessionStorage.setItem(STORAGE_KEY, token);
-        localStorage.removeItem(STORAGE_KEY);
-        localStorage.setItem(REMEMBER_KEY, "0");
-    }, []);
-
-    const clearSession = useCallback(() => {
-        localStorage.removeItem(STORAGE_KEY);
-        sessionStorage.removeItem(STORAGE_KEY);
-        localStorage.removeItem(REMEMBER_KEY);
-        setUser(null);
-        setAuthCookie(null);
-    }, []);
-
-    const logout = useCallback(async (options = {}) => {
-        const reason = options?.reason || "manual";
-        const callApi = options?.callApi ?? true;
-
-        try {
-            if (callApi) {
-                await fetch(`${API_URL}/logout`, {
-                    method: "POST",
-                    credentials: "include",
-                });
-            }
-        } catch (error) {
-            // Error silencioso
-        } finally {
-            clearSession();
-            navigate("/login");
-
-            if (reason === "expired") {
-                toast.error("Tu sesión expiró. Inicia sesión nuevamente");
-            } else {
-                toast.success("Sesión cerrada correctamente");
-            }
-        }
-    }, [clearSession, navigate]);
-
-   const login = async (email, password) => {
-  try {
-    const response = await fetch(
-      "http://localhost:4000/api/loginCustomer",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-        credentials: "include",
       }
-    );
+    },
+    [clearSession, navigate],
+  );
 
-    const data = await response.json();
+  const login = async (email, password) => {
+    try {
+      const response = await fetch(`${API_URL}/loginCustomers`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      });
 
-    if (!response.ok) {
-      toast.error(data.message);
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.message);
+        return false;
+      }
+
+      setUser(data.user);
+      toast.success(data.message);
+      navigate("/");
+      return true;
+    } catch (error) {
+      toast.error("Error al conectar con el servidor");
       return false;
     }
+  };
 
-    toast.success(data.message);
+  useEffect(() => {
+    let isMounted = true;
 
-    navigate("/");
+    const checkAuth = async () => {
+      try {
+        const response = await fetch(`${API_URL}/customers/me`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // la cookie viaja sola, no hace falta token
+        });
 
-    return true;
+        if (!response.ok) {
+          if (isMounted) clearSession();
+          return;
+        }
 
-  } catch (error) {
+        const payload = await response.json().catch(() => ({}));
 
-    toast.error("Error al conectar con el servidor");
-    return false;
+        if (isMounted && payload?.user) {
+          setUser(payload.user);
+        }
+      } catch (error) {
+        if (isMounted) clearSession();
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
 
-  }
-};
+    checkAuth();
 
-    useEffect(() => {
-        let isMounted = true;
+    return () => {
+      isMounted = false;
+    };
+  }, [clearSession]);
 
-        const checkAuth = async () => {
-            try {
-                const token = getStoredToken();
-
-                if (!token) {
-                    clearSession();
-                    return;
-                }
-
-                const decodedToken = decodeJwtPayload(token);
-                const isTokenExpired =
-                    decodedToken?.exp && decodedToken.exp * 1000 <= Date.now();
-
-                if (!decodedToken || isTokenExpired) {
-                    clearSession();
-                    navigate("/");
-                    return;
-                }
-
-                const response = await fetch(`${API_URL}/users`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}`,
-                    },
-                    credentials: "include",
-                });
-
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        clearSession();
-                        navigate("/");
-                        return;
-                    }
-                    clearSession();
-                    return;
-                }
-
-                if (!isMounted) {
-                    return;
-                }
-
-                const payload = await response.json().catch(() => ({}));
-                const { accessToken } = extractAuthData(payload);
-                const effectiveToken = accessToken || token;
-                const rememberMe = localStorage.getItem(REMEMBER_KEY) === "1";
-
-                if (effectiveToken) {
-                    persistToken(effectiveToken, rememberMe);
-                    setAuthCookie(effectiveToken);
-                }
-
-                const decoded = decodeJwtPayload(effectiveToken);
-                if (decoded) {
-                    setUser({
-                        id: decoded.id,
-                        userType: decoded.userType,
-                    });
-                }
-            } catch (error) {
-                // Error de validación silencioso
-                clearSession();
-            } finally {
-                if (isMounted) {
-                    setLoading(false);
-                }
-            }
-        };
-
-        checkAuth();
-
-        return () => {
-            isMounted = false;
-        };
-    }, [clearSession, getStoredToken, navigate, persistToken]);
-
-    return (
-        <AuthContext.Provider
-            value={{
-                user,
-                setUser,
-                authCookie,
-                logout,
-                login,
-                loading,
-                API: API_URL,
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        logout,
+        login,
+        loading,
+        API: API_URL,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

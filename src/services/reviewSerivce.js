@@ -1,4 +1,3 @@
-// 🔥 Cambiado para coincidir exactamente con tu app.use("/api/productsReview")
 const API_URL = "http://localhost:4000/api/productsReview";
 
 // Obtener las reseñas filtradas por el ID de MongoDB del producto
@@ -17,11 +16,19 @@ export const insertReview = async (reviewData) => {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include", // la cookie httpOnly viaja sola
     body: JSON.stringify(reviewData),
   });
 
+  const data = await response.json().catch(() => ({}));
+
   if (!response.ok) {
-    throw new Error("Error al guardar la reseña en el servidor");
+    const error = new Error(
+      data.message || "Error al guardar la reseña en el servidor",
+    );
+    error.status = response.status;
+    throw error;
   }
-  return response.json();
+
+  return data;
 };

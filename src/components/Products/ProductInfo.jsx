@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import VariantSelector from "./VariantSelector";
 import SizeSelector from "./SizeSelector";
 import { useCart } from "../../context/CartContext";
@@ -17,6 +19,18 @@ const ProductInfo = ({
     : product.price;
 
   const { addToCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    if (!selectedSize) return;
+
+    const result = addToCart(product, activeVariant, selectedSize);
+
+    if (result.requiresAuth) {
+      toast.error(result.message);
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -59,9 +73,7 @@ const ProductInfo = ({
 
       <button
         disabled={!selectedSize}
-        onClick={() =>
-          selectedSize && addToCart(product, activeVariant, selectedSize)
-        }
+        onClick={handleAddToCart}
         className={`py-3 font-semibold text-sm tracking-wide transition-colors ${
           selectedSize
             ? "bg-black text-white hover:bg-gray-800"

@@ -56,8 +56,8 @@ const ProductDetailScreen = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col gap-16">
-      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-12">
+    <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col gap-16 overflow-x-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,480px)_1fr] gap-8 lg:gap-12">
         <ImageGallery
           activeImage={activeImage}
           setActiveImage={setActiveImage}
@@ -73,7 +73,6 @@ const ProductDetailScreen = () => {
         />
       </div>
 
-      {/* 🔥 AQUÍ SE RENDERIZA PASANDO EL ID DE MONGO */}
       <ReviewsSection productId={product._id} />
     </div>
   );

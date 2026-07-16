@@ -16,24 +16,22 @@ const ImageZoom = ({ src }) => {
     const percentX = (x / rect.width) * 100;
     const percentY = (y / rect.height) * 100;
 
-    // 🔥 mover lente SIN re-render
     if (lensRef.current) {
       lensRef.current.style.left = `${x - 88}px`;
       lensRef.current.style.top = `${y - 88}px`;
     }
 
-    // 🔥 mover fondo SIN re-render
     if (zoomRef.current) {
       zoomRef.current.style.backgroundPosition = `${percentX}% ${percentY}%`;
     }
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-[480px] mx-auto lg:mx-0">
       {/* IMAGEN */}
       <div
         ref={imgRef}
-        className="relative w-[600px] aspect-square bg-gray-100 overflow-hidden"
+        className="relative w-full aspect-square bg-gray-100 overflow-hidden"
         onMouseEnter={() => setShowZoom(true)}
         onMouseLeave={() => setShowZoom(false)}
         onMouseMove={handleMouseMove}
@@ -44,19 +42,19 @@ const ImageZoom = ({ src }) => {
           draggable={false}
         />
 
-        {/* 🔍 LENTE */}
+        {/* LENTE — solo visible en pantallas grandes, donde sí hay hover real */}
         <div
           ref={lensRef}
-          className={`absolute w-44 h-44 border border-black bg-white/20 pointer-events-none
+          className={`hidden lg:block absolute w-44 h-44 border border-black bg-white/20 pointer-events-none
           transition-opacity duration-150
           ${showZoom ? "opacity-100" : "opacity-0"}`}
         />
       </div>
 
-      {/* 🔥 ZOOM PANEL */}
+      {/* ZOOM PANEL — solo en pantallas grandes que tienen espacio para mostrarlo al costado */}
       <div
         ref={zoomRef}
-        className={`absolute top-0 left-full ml-6 w-[500px] aspect-square border bg-no-repeat bg-white shadow-xl z-50
+        className={`hidden xl:block absolute top-0 left-full ml-6 w-[420px] aspect-square border bg-no-repeat bg-white shadow-xl z-50
         transition-all duration-200 ease-out
         ${showZoom ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
         style={{

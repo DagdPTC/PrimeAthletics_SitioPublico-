@@ -1,10 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { useCart } from "../context/CartContext";
 
 const CartScreen = () => {
-  const { cartItems, removeFromCart, updateQuantity, subtotal, clearCart } =
-    useCart();
+  const {
+    cartItems,
+    removeFromCart,
+    updateQuantity,
+    subtotal,
+    clearCart,
+    checkout,
+  } = useCart();
   const navigate = useNavigate();
+
+  const handleProceedToPayment = () => {
+    navigate("/checkout");
+  };
 
   const totalDiscount = cartItems.reduce((acc, i) => {
     if (i.discount > 0) return acc + (i.originalPrice - i.price) * i.quantity;

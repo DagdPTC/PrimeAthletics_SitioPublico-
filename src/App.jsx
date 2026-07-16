@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import ScrollToTop from "./components/ScrollToTop";
 import Navbar from "./components/Navbar";
@@ -21,54 +22,62 @@ import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import CodeVerificationScreen from "./screens/CodeVerificationScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import NewPasswordScreen from "./screens/NewPasswordScreen";
-
+import OrdersScreen from "./screens/OrdersScreen";
 
 const App = () => {
   return (
-    <CartProvider>
-      <Router>
-        <ScrollToTop />
-        <Navbar />
-        <CartDrawer />
+    <Router>
+      <AuthProvider>
+        <CartProvider>
+          <ScrollToTop />
+          <Navbar />
+          <CartDrawer />
 
-        <div className="min-h-screen bg-gray-50">
-          <main>
-            <Routes>
-              <Route path="/login" element={<LoginScreen />} />
-              <Route path="/" element={<HomeScreen />} />
-              <Route path="/hombres" element={<MenScreen />} />
-              <Route path="/mujeres" element={<WomenScreen />} />
-              <Route path="/ninos" element={<KidsScreen />} />
-              <Route path="/:gender/:category" element={<CategoryScreen />} />
-              <Route
-                path="/:gender/deporte/:sport"
-                element={<CategoryScreen />}
-              />
-              <Route
-                path="/:gender/tipo/:productType"
-                element={<CategoryScreen />}
-              />
-              <Route path="/product/:id" element={<ProductDetailScreen />} />
-              <Route path="/checkout" element={<CheckoutScreen />} />
-              <Route
-                path="/checkout/confirmacion"
-                element={<OrderConfirmationScreen />}
-              />
-              <Route path="/nosotros" element={<AboutScreen />} />
-              <Route path="/novedades" element={<NovedadesScreen />} />
-              <Route path="/carrito" element={<CartScreen />} />
-              <Route path="/recuperar" element={<ForgotPasswordScreen />} />
-              <Route path="/nuevaContraseña" element={<NewPasswordScreen/>} />
-              <Route path="/verificacion" element={<CodeVerificationScreen />} />
-              <Route path="/registro" element={<RegisterScreen />} />
+          <div className="min-h-screen bg-gray-50">
+            <main>
+              <Routes>
+                <Route path="/login" element={<LoginScreen />} />
+                <Route path="/" element={<HomeScreen />} />
+                <Route path="/hombres" element={<MenScreen />} />
+                <Route path="/mujeres" element={<WomenScreen />} />
+                <Route path="/ninos" element={<KidsScreen />} />
+                <Route path="/:gender/:category" element={<CategoryScreen />} />
+                <Route path="/mis-pedidos" element={<OrdersScreen />} />
+                <Route
+                  path="/:gender/deporte/:sport"
+                  element={<CategoryScreen />}
+                />
+                <Route
+                  path="/:gender/tipo/:productType"
+                  element={<CategoryScreen />}
+                />
+                <Route path="/product/:id" element={<ProductDetailScreen />} />
+                <Route path="/checkout" element={<CheckoutScreen />} />
+                <Route
+                  path="/checkout/confirmacion"
+                  element={<OrderConfirmationScreen />}
+                />
+                <Route path="/nosotros" element={<AboutScreen />} />
+                <Route path="/novedades" element={<NovedadesScreen />} />
+                <Route path="/carrito" element={<CartScreen />} />
+                <Route path="/recuperar" element={<ForgotPasswordScreen />} />
+                <Route
+                  path="/nuevaContraseña"
+                  element={<NewPasswordScreen />}
+                />
+                <Route
+                  path="/verificacion"
+                  element={<CodeVerificationScreen />}
+                />
+                <Route path="/registro" element={<RegisterScreen />} />
+              </Routes>
+            </main>
+          </div>
 
-            </Routes>
-          </main>
-        </div>
-
-        <Footer />
-      </Router>
-    </CartProvider>
+          <Footer />
+        </CartProvider>
+      </AuthProvider>
+    </Router>
   );
 };
 

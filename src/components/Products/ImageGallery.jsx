@@ -2,14 +2,19 @@ import ImageZoom from "./ImageZoom";
 
 const ImageGallery = ({ activeImage, setActiveImage, activeVariant }) => {
   return (
-    <div className="flex gap-4 sticky top-20 self-start">
-      {/* THUMBNAILS */}
-      <div className="flex flex-col gap-3">
+    <div className="flex flex-col lg:flex-row gap-4 lg:sticky lg:top-20 lg:self-start">
+      {/* IMAGEN PRINCIPAL — primero en mobile */}
+      <div className="order-1 lg:order-2">
+        <ImageZoom src={activeImage?.url} />
+      </div>
+
+      {/* THUMBNAILS — fila horizontal en mobile, columna en desktop */}
+      <div className="order-2 lg:order-1 flex flex-row lg:flex-col gap-3 overflow-x-auto lg:overflow-visible">
         {activeVariant?.images?.map((img, i) => (
           <button
             key={img.public_id || i}
             onClick={() => setActiveImage(img)}
-            className={`w-20 aspect-square bg-white transition-all duration-150 ${
+            className={`w-16 lg:w-20 aspect-square flex-shrink-0 bg-white transition-all duration-150 ${
               activeImage?.public_id === img.public_id
                 ? "border-2 border-black"
                 : "border border-gray-200 hover:border-gray-400"
@@ -23,9 +28,6 @@ const ImageGallery = ({ activeImage, setActiveImage, activeVariant }) => {
           </button>
         ))}
       </div>
-
-      {/* Le enviamos al componente de Zoom únicamente la URL en formato texto */}
-      <ImageZoom src={activeImage?.url} />
     </div>
   );
 };
