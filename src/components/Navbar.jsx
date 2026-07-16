@@ -3,7 +3,7 @@ import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import MegaMenu from "./MegaMenu";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../hooks/useAuth"; // ajustá el path real
-import { megaMenuData } from "../data/categoriesData";
+import { useMegaMenu } from "../hooks/useMegaMenu";
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -12,6 +12,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const closeTimeout = useRef(null);
+
+  const { menuData } = useMegaMenu();
 
   if (location.pathname === "/login") return null;
 
@@ -315,6 +317,7 @@ const Navbar = () => {
         isOpen={!!activeMenu}
         onMouseEnter={() => handleMouseEnter(activeMenu)}
         onMouseLeave={handleMouseLeave}
+        menuData={menuData}
       />
 
       {/* OVERLAY MOBILE */}
@@ -344,7 +347,7 @@ const Navbar = () => {
 
           {/* Géneros con submenu desplegable */}
           {mobileGenderLinks.map(({ key, label, path }) => {
-            const data = megaMenuData[key];
+            const data = menuData?.[key];
             const isExpanded = mobileSubmenu === key;
 
             return (
